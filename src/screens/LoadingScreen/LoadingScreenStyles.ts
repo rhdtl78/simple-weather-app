@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: 40,
     paddingHorizontal: 25,
-    marginBottom: 100,
+    marginBottom: 25,
   },
 });
 
