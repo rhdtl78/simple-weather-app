@@ -6,18 +6,6 @@ import {
 } from 'react-native-dotenv';
 import LoadingScreen from 'screens/LoadingScreen';
 import WeatherScreen from 'screens/WeatherScreen';
-type Weather = {
-  temperature: number | string;
-  name:
-    | 'Rain'
-    | 'Clear'
-    | 'Thunderstrom'
-    | 'Clouds'
-    | 'Snow'
-    | 'Drizzle'
-    | 'Haze'
-    | 'Mist';
-};
 
 export default function App() {
   const [isLoaded, setLoadState] = useState(false);

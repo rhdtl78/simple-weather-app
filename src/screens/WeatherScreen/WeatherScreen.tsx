@@ -3,28 +3,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { ReactElement } from 'react';
 import { Text, View } from 'react-native';
 import styles from './WeatherScreenStyles';
-interface Props {
-  temp: number | string;
-  weatherName:
-    | 'Rain'
-    | 'Clear'
-    | 'Thunderstrom'
-    | 'Clouds'
-    | 'Snow'
-    | 'Drizzle'
-    | 'Haze'
-    | 'Mist';
-  address: string;
-}
-
-type WeatherCase = {
-  colors: string[];
-  title: string;
-  subTitle: string;
-  iconName: string;
-};
-
-type WeatherCases = Record<string, WeatherCase>;
 
 const WEATHER_CASES: WeatherCases = {
   Rain: {
@@ -81,7 +59,7 @@ export default function WeatherScreen({
   temp,
   weatherName,
   address,
-}: Props): ReactElement {
+}: WeatherScreenProps): ReactElement {
   return (
     <LinearGradient
       colors={WEATHER_CASES[weatherName].colors}
