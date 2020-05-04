@@ -16,3 +16,6 @@ web-report/
 # env
 .env
 .vscode
+
+# logs
+*.logs
