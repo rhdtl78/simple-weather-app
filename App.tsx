@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import {
+  GCP_GEOCODING_API_KEY,
+  OPEN_WEATHER_API_KEY,
+} from 'react-native-dotenv';
 import LoadingScreen from 'screens/LoadingScreen';
 import WeatherScreen from 'screens/WeatherScreen';
-
-const OPEN_WEATER_MAP_API_KEY = '88c6bb40c5fc3c1e010f0d2eb4047dfe';
-
 type Weather = {
   temperature: number | string;
   name:
@@ -22,13 +23,16 @@ export default function App() {
   const [isLoaded, setLoadState] = useState(false);
   const [error, setErrorState] = useState<PositionError>();
   const [weather, setWeather] = useState<Weather>({
-    temperature: 0,
+    temperature: 36.5 + 273.15,
     name: 'Rain',
   });
+  const [address, setAddress] = useState('');
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        getWeather(position.coords.latitude, position.coords.longitude);
+        const { latitude, longitude } = position.coords;
+        getWeather(latitude, longitude);
+        getLocation(latitude, longitude);
       },
       (error) => {
         setErrorState(error);
@@ -39,7 +43,7 @@ export default function App() {
 
   const getWeather = async (lat: number, lon: number) => {
     const response = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATER_MAP_API_KEY}`
+      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}`
     );
     const res = await response.json();
     setWeather({
@@ -49,13 +53,26 @@ export default function App() {
     setLoadState(true);
   };
 
+  const getLocation = async (lat: number, lon: number) => {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${GCP_GEOCODING_API_KEY}`
+    );
+    const res = await response.json();
+
+    setAddress(res.results[0].formatted_address);
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar hidden={true} />
       {!isLoaded ? (
         <LoadingScreen />
       ) : (
-        <WeatherScreen temp={weather.temperature} weatherName={weather.name} />
+        <WeatherScreen
+          temp={weather.temperature}
+          weatherName={weather.name}
+          address={address}
+        />
       )}
       {error && <Text>{error.message}</Text>}
     </View>

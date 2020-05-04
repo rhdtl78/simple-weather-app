@@ -29,6 +29,11 @@ const WeaterScreenStyles = StyleSheet.create({
   subtitle: {
     fontSize: 25,
     color: 'white',
+    marginBottom: 10,
+  },
+  address: {
+    fontSize: 15,
+    color: 'white',
     marginBottom: 25,
   },
 });

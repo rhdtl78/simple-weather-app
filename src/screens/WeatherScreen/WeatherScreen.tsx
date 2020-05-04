@@ -14,6 +14,7 @@ interface Props {
     | 'Drizzle'
     | 'Haze'
     | 'Mist';
+  address: string;
 }
 
 type WeatherCase = {
@@ -28,44 +29,44 @@ type WeatherCases = Record<string, WeatherCase>;
 const WEATHER_CASES: WeatherCases = {
   Rain: {
     colors: ['#00C6FB', '#005BEA'],
-    title: 'Raining like a MF',
-    subTitle: 'For more info look outside',
+    title: 'Raining',
+    subTitle: 'For more info look outside.',
     iconName: 'weather-rainy',
   },
   Clear: {
     colors: ['#FEF253', '#FF7300'],
-    title: 'Sunny as fuck',
-    subTitle: 'Go get your ass burnt',
+    title: 'Sunny',
+    subTitle: 'Good to hang out someone.',
     iconName: 'weather-sunny',
   },
   Thunderstorm: {
     colors: ['#00ECBC', '#00&ADF'],
-    title: 'Thunderstorm int the house',
-    subTitle: 'Actually outside of ther house',
+    title: 'Thunderstorm in the house',
+    subTitle: 'Actually outside of the house',
     iconName: 'weather-lightning',
   },
   Clouds: {
     colors: ['#D7D2CC', '#304352'],
     title: 'Clouds',
-    subTitle: 'I know, fucking boring',
+    subTitle: 'Gloomy, but keep what you doing.',
     iconName: 'weather-cloudy',
   },
   Snow: {
     colors: ['#7DE2FC', '#B9B6E5'],
-    title: 'Cold as balls',
-    subTitle: 'Do you want to build a snowman? Fuck no.',
+    title: 'Snow',
+    subTitle: 'Do you want to build a snowman?',
     iconName: 'weather-snowy',
   },
   Drizzle: {
     colors: ['#89F7FE', '#66A6FF'],
     title: 'Drizzle',
-    subTitle: 'Is like rain, but gay',
+    subTitle: 'Not a havy rain.',
     iconName: 'weather-hail ',
   },
   Haze: {
     colors: ['#89F7FE', '#66A6FF'],
     title: 'Haze',
-    subTitle: "Don't know what that is.",
+    subTitle: "It's like you have no glasses.",
     iconName: 'weather-hail',
   },
   Mist: {
@@ -79,6 +80,7 @@ const WEATHER_CASES: WeatherCases = {
 export default function WeatherScreen({
   temp,
   weatherName,
+  address,
 }: Props): ReactElement {
   return (
     <LinearGradient
@@ -98,6 +100,7 @@ export default function WeatherScreen({
         <Text style={styles.subtitle}>
           {WEATHER_CASES[weatherName].subTitle}
         </Text>
+        <Text style={styles.address}>{address}</Text>
       </View>
     </LinearGradient>
   );
