@@ -18,4 +18,4 @@ web-report/
 .vscode
 
 # logs
-*.logs
+*.log
