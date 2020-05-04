@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "fucking-weather-app",
-    "slug": "fucking-weather-app",
+    "name": "simple-weather-app",
+    "slug": "simple-weather-app",
     "platforms": [
       "ios",
       "android",
